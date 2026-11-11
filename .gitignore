@@ -1,0 +1,9 @@
+asset-cache/
+fixtures/
+__pycache__/
+.sites-runtime/
+
+node_modules/
+.env
+.env.*
+*.log

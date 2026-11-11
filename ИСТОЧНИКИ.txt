@@ -1,0 +1,8 @@
+Программа не связана с Mojang или Microsoft. Текстуры и названия Minecraft принадлежат их правообладателям.
+Источники ресурсов:
+https://github.com/PrismarineJS/minecraft-assets
+https://github.com/Owen1212055/mc-assets
+https://github.com/InventivetalentDev/minecraft-assets
+Библиотека Three.js: лицензия в vendor/THREE-LICENSE.txt (в kit — source/vendor/THREE-LICENSE.txt).
+
+Оформление: предоставленный пользователем Opera Design Kit, тема D1. Арт theme/racing-transparent.png сохранён без изменения.

@@ -1,0 +1,8 @@
+{
+  "name": "litematica-materials",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Minecraft schematic material checklist and Google Sheets export",
+  "scripts": {"build:viewer": "node scripts/build-viewer.mjs"},
+  "devDependencies": {"esbuild": "0.25.11", "three": "0.180.0"}
+}

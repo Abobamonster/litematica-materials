@@ -1,0 +1,7 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+vm.runInThisContext(fs.readFileSync('core.js','utf8'));const core=litematicaCore();
+async function parse(name){const b=fs.readFileSync('fixtures/'+name+'.litematic');return core.parse(b.buffer.slice(b.byteOffset,b.byteOffset+b.length));}
+(async()=>{let n=0;for(const [name,expected] of Object.entries(JSON.parse(fs.readFileSync('fixtures/expected.json')))){const result=await parse(name);assert.deepEqual(Object.fromEntries(result.rows.map(r=>[r.id,r.count])),expected,name);if(name==='multi'){assert.equal(result.regionCount,2);assert.equal(result.air,6);assert.equal(result.overlaps,false);}n++;}
+await assert.rejects(()=>parse('bad'));await assert.rejects(()=>parse('future'),/не поддерживается/);await assert.rejects(()=>core.parse(new Uint8Array([1,2,3]).buffer));
+const rows=[{id:'minecraft:stone',name:'Камень',count:2,done:false,image:''}];vm.runInThisContext(fs.readFileSync('Code.gs','utf8'));assert.equal(validatePayload_({requestId:'12345678-1234-1234-1234-123456789abc',name:'Test',access:'view',rows}).rows.length,1);assert.throws(()=>validatePayload_({requestId:'bad',name:'Test',access:'view',rows}));assert.equal(safeText_('=IMPORTXML("evil")'),'\'=IMPORTXML("evil")');
+console.log('PASS:',n,'schematics (bits 2–16, 32/64-bit boundaries, gzip/raw, negative sizes, multiple regions), malformed/future NBT and export validation.');})().catch(e=>{console.error(e);process.exit(1)});

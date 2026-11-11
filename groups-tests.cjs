@@ -1,0 +1,8 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+vm.runInThisContext(fs.readFileSync('groups.js','utf8'));
+const cases={oak_log:'oak',stripped_oak_wood:'oak',oak_stairs:'oak',oak_door:'oak',dark_oak_planks:'dark_oak',stripped_dark_oak_log:'dark_oak',pale_oak_leaves:'pale_oak',stone:'stone',smooth_stone_slab:'stone',stone_bricks:'stone',mossy_stone_brick_stairs:'stone',chiseled_stone_bricks:'stone',cobblestone_wall:'stone',andesite:'andesite',polished_andesite_stairs:'andesite',granite_wall:'granite',diorite_slab:'diorite',deepslate_tiles:'deepslate',cobbled_deepslate_stairs:'deepslate',polished_blackstone_bricks:'blackstone',red_sandstone:'red_sandstone',sandstone_stairs:'sandstone',end_stone:'end_stone',glowstone:'other',redstone_wire:'other',stonecutter:'other',white_concrete:'concrete',white_concrete_powder:'concrete_powder'};
+for(const [name,key] of Object.entries(cases))assert.equal(materialGroup('minecraft:'+name).key,key,name);
+assert.equal(materialGroup('mod:oak_planks').key,'other');assert.equal(materialGroup('minecraft:unknown_new_block').key,'other');
+const assets=JSON.parse(fs.readFileSync('dist/assets.json','utf8'));for(const name of Object.keys(assets.images))if(/andesite|granite|diorite/.test(name))assert.notEqual(materialGroup('minecraft:'+name).key,'stone',name);
+assert(compareMaterialGroups(materialGroup('minecraft:stone'),materialGroup('mod:stone'))<0);
+console.log('PASS groups: oak/dark oak separated; exact stone family excludes andesite, granite, diorite, blackstone, end stone, glowstone and redstone; unknown namespaces remain unclassified.');
